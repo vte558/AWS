@@ -1,2 +1,32 @@
 AWS CLI
 --------------
+>aws configure
+>aws s3 ls  --> give the list of s3 bucket
+
+to create ec2 instance
+---------------------
+
+
+aws ec2 run-instances --image-id ami-014d544cfef21b42d --instance-type t2.micro  --subnet-id subnet-029fb888e342a3a65
+--security-group-ids sg-0fa8d79456da86b66  --associate-public-ip-address --key-name aws_login
+
+to list out the security group 
+------------------------------
+aws ec2 describe-security-groups \
+  --query "SecurityGroups[*].[GroupId,GroupName,Description]" \
+  --output table
+  
+Run this command to list valid subnets in your current region:
+ -------------------------------------------------------------------- 
+aws ec2 describe-subnets \
+  --query "Subnets[*].[SubnetId,AvailabilityZone,VpcId]" \
+  --output table
+  
+To get the latest Amazon Linux 2 AMI (for example) in your region:  image id
+----------------------------------------------------------------------
+
+aws ec2 describe-images \
+  --owners amazon \
+  --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" \
+  --query "Images[*].[ImageId,Name]" \
+  --output table
